@@ -6,23 +6,27 @@ import "./Button.css";
 
 export const Button = () => {
   const [snowing, setSnowing] = React.useState(true);
+  const [text, setText] = React.useState<String>("empty.");
 
   React.useEffect(() => {
-    chrome.runtime.sendMessage({ type: "REQ_SNOW_STATUS" });
+    //chrome.runtime.sendMessage({ type: "REQ_SNOW_STATUS" });
 
-    chrome.runtime.onMessage.addListener((message: MessageType) => {
+    //chrome.runtime.sendMessage({ type: "START_GIVEAWAY" });
+
+    chrome.runtime.onMessage.addListener((message: any) => {
       switch (message.type) {
-        case "SNOW_STATUS":
-          setSnowing(message.snowing);
+        case "START_GIVEAWAY":
+          setText("msg received..");
           break;
         default:
           break;
       }
     });
-  }, []);
+   }, []);
 
   const onClick = () => {
-    chrome.runtime.sendMessage({ type: "TOGGLE_SNOW", snowing: !snowing });
+    //chrome.runtime.sendMessage({ type: "TOGGLE_SNOW", snowing: !snowing });
+    chrome.runtime.sendMessage({ type: "START_GIVEAWAY"});
   };
 
   return (
@@ -30,6 +34,7 @@ export const Button = () => {
       <button className="snowButton" onClick={onClick}>
         {snowing ? "Disable the snow 🥶" : "Let it snow! ❄️"}
       </button>
+      { text  }
     </div>
   );
 };

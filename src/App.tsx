@@ -9,7 +9,7 @@ const App = () => {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello there! This is glenn</p>
+        <p>Hello there! This is a Giveaway Generator..  :D </p>
       </header>
 
       <Button />
